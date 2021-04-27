@@ -9,7 +9,7 @@ namespace WebApiGame.Services
 {
     public interface IWeaponService
     {
-        public ServiceResponse<CharacterReadDto> AddWeapon(WeaponWriteDto weaponWriteDto);
+        public Task<ServiceResponse<CharacterReadDto>> AddWeapon(WeaponWriteDto weaponWriteDto);
 
     }
 }

@@ -24,6 +24,11 @@ namespace WebApiGame.Models
 
         public Weapon Weapon { get; set; }
 
+        public List<CharacterSkill> CharacterSkill { get; set; }
+        public int Fights { get; set; }
+        public int Victories { get; set; }
+        public int Defeats { get; set; }
+
         public Character()
         {        }
         public Character(int id, string name, int hitPoints, int strength, int defence, int intelligence, RpgClass rpg)

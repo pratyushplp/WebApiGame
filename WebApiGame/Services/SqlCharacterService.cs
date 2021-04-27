@@ -72,7 +72,7 @@ namespace WebApiGame.Services
         public async Task<ServiceResponse<List<CharacterReadDto>>> GetAllCharacters()
         {
             ServiceResponse<List<CharacterReadDto>> serviceResponse = new ServiceResponse<List<CharacterReadDto>>();
-            List<Character> characterList = await _dbContext.Characters.Where(x=>x.User.Id == getUserId()).ToListAsync();
+            List<Character> characterList = await _dbContext.Characters.Include(x => x.Weapon).Where(x=>x.User.Id == getUserId()).ToListAsync();
             serviceResponse.data = _mapper.Map<List<CharacterReadDto>>(characterList);
             return serviceResponse;
         }
@@ -103,8 +103,8 @@ namespace WebApiGame.Services
                 Character updateCharacter = await _dbContext.Characters.FirstOrDefaultAsync(x=>x.Id == characterUpdate.Id && x.User.Id == getUserId());
                 //alternative
                 //Character updateCharacter2 = await _dbContext.Characters.Include(x=>x.User).FirstOrDefaultAsync(x => x.Id == characterUpdate.Id);
-                //// Note: notice the include above linq method, if we dont include the user(i.eInclude(x=>x.User)) we dont get the use value from character table, 
-                ///      as we have maintained a relation of user in character table but not sored the complete user value inside character table.
+                //// Note: notice the include above linq method, if we dont include the user(i.eInclude(x=>x.User)) we dont get the user value from character table, 
+                //      as we have maintained a relation of user in character table but not stored the complete user value inside character table.
                 //if(updateCharacter2.User.Id == getUserId())
                 //{
                 //    //update here

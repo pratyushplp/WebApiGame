@@ -26,17 +26,28 @@ namespace WebApiGame.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public ServiceResponse<CharacterReadDto> AddWeapon(WeaponWriteDto weaponWriteDto)
+        public async  Task<ServiceResponse<CharacterReadDto>> AddWeapon(WeaponWriteDto weaponWriteDto)
         {
             ServiceResponse<CharacterReadDto> response = new ServiceResponse<CharacterReadDto>();
             try
             {
-               //return int.Parse(_httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value ?? "0");
+                Character character = _dataContext.Characters.FirstOrDefault(x => x.User.Id == GetId() && x.Id == weaponWriteDto.CharacterId);
 
-                if (_dataContext.Users.Where(x=>x.Id == ))
+                if (character != null)
                 {
                     Weapon newWeapon = _mapper.Map<Weapon>(weaponWriteDto);
+                    _dataContext.Weapons.Add(newWeapon);
+                    await _dataContext.SaveChangesAsync();
+
+                    response.data = _mapper.Map<CharacterReadDto>(character);
                 }
+                else
+                {
+                    response.data = null;
+                    response.success = false;
+                    response.message ="Character for corresponding user not found";
+                }
+
             }
 
             catch(Exception ex)

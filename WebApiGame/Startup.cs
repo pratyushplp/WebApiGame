@@ -36,6 +36,11 @@ namespace WebApiGame
             services.AddControllers();
             services.AddScoped<ICharacterServiceAsync, SqlCharacterService>();
             services.AddScoped<IAuthenticationRepo, AuthenticationRepo>();
+            services.AddScoped<IWeaponService, WeaponService>();
+            services.AddScoped<ICharacterSkillService, CharacterSkillService>();
+            services.AddScoped<IFightService, FightService>();
+
+
             services.AddAutoMapper(typeof(Startup));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
             {
