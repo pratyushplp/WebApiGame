@@ -1,4 +1,12 @@
 # WebApiGame
-Created a simple web api game simulation which consist of characters,weapons and skills using asp.net core 3.1 web apis, Entity framework, MSSQL, automapper.
-Implemented JWT authentication for security. 
-implemented repository pattern, DTO, dependecy injection, code first approact for EF, hashing ans salting for password protection.
+A simple web API game simulation that consists of characters, weapons and skills.
+Created the application using the following technologies
+1. asp.net core 3.1 web apis
+2. Entity framework
+3. MSSQL
+4. Automapper
+5. Implemented JWT authentication for security(hashing and salting for password protection.)
+
+Following Desing Patterns and methodologies were implemented
+
+implemented repository pattern, DTO, dependency injection, code code-first approach for EF.
